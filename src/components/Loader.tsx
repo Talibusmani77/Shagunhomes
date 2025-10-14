@@ -44,7 +44,7 @@ export const Loader = ({ onComplete }: { onComplete: () => void }) => {
           <div className="relative z-10 animate-pulse">
             <div className="w-24 h-24 md:w-32 md:h-32 flex items-center justify-center">
               <img 
-                src="/src/images/Shagunlogo.png" 
+                src="/Shagunlogo.png" 
                 alt="ShagunHomes Logo" 
                 className="w-full h-full object-contain"
               />
