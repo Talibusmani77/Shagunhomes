@@ -34,7 +34,7 @@ export const MainNavbar = ({ isScrolled, topNavVisible }: MainNavbarProps) => {
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 group">
           <img 
-            src="/src/images/Shagunlogo.png" 
+            src="/Shagunlogo.png" 
             alt="ShagunHomes Logo" 
             className="h-20 md:h-24 lg:h-28 w-auto object-contain max-w-[280px] md:max-w-[350px]"
           />

@@ -15,7 +15,7 @@ export const Footer = () => {
           <div className="space-y-4">
             <div className="flex items-center">
               <img 
-                src="/src/images/Shagunlogo.png" 
+                src="/Shagunlogo.png" 
                 alt="ShagunHomes Logo" 
                 className="h-24 md:h-28 lg:h-32 w-full max-w-[180px] md:max-w-[210px] lg:max-w-[250px] object-fill"
               />
