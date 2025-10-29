@@ -42,11 +42,11 @@ export const TopMiniNav = ({ visible }: TopMiniNavProps) => {
             </div>
             <div className="flex items-center gap-2">
               <Mail className="w-5 h-5" />
-              <span>info@shagunhomes.com</span>
+              <span>info@shagunhomes.in</span>
             </div>
             <span>|</span>
-            <a href="tel:+919268007694" className="hover:text-primary transition-colors">
-              +91 9268007694
+            <a href="tel:+917678121555" className="hover:text-primary transition-colors">
+              +91 7678121555
             </a>
             <Button
               size="sm"

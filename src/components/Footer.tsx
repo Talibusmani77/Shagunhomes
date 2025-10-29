@@ -21,7 +21,7 @@ export const Footer = () => {
               />
             </div>
             <p className="text-sm opacity-90 leading-relaxed">
-              Your trusted real estate partner in Noida. We provide verified listings, local expertise, and transparent dealings for all your property needs.
+              Your trusted real estate partner in Greater Noida. We provide verified listings, local expertise, and transparent dealings for all your property needs.
             </p>
             <div className="flex gap-3">
               <a href="#" className="hover:text-secondary transition-colors">
@@ -115,26 +115,23 @@ export const Footer = () => {
             <ul className="space-y-3 text-sm">
               <li className="flex gap-2 opacity-90">
                 <MapPin className="w-5 h-5 flex-shrink-0 mt-0.5" />
-                <span>FF-32, Hemisphere Galleria, Opp. Delta Metro Station, Sector-27, Gr. Noida - 201310</span>
+                <span>FF-32, Hemisphere Galleria, Opp. Delta Metro Station, Sector-27, Greater Noida - 201310</span>
               </li>
               <li className="flex items-center gap-2">
                 <Phone className="w-5 h-5 flex-shrink-0" />
                 <div className="space-y-1">
-                  <a href="tel:+919268007694" className="hover:text-secondary transition-colors opacity-90 hover:opacity-100 block">
-                    +91 9268007694
+                  <a href="tel:+917678121555" className="hover:text-secondary transition-colors opacity-90 hover:opacity-100 block">
+                    +91 7678121555
                   </a>
                   <a href="tel:+919540408051" className="hover:text-secondary transition-colors opacity-90 hover:opacity-100 block">
-                    +91 9540408051
-                  </a>
-                  <a href="tel:+919540400172" className="hover:text-secondary transition-colors opacity-90 hover:opacity-100 block">
-                    +91 9540400172
+                    +91 9871035001
                   </a>
                 </div>
               </li>
               <li className="flex items-center gap-2 opacity-90">
                 <Mail className="w-5 h-5 flex-shrink-0" />
                 <a href="mailto:info@shagunhomes.com" className="hover:text-secondary transition-colors hover:opacity-100">
-                  info@shagunhomes.com
+                  info@shagunhomes.in
                 </a>
               </li>
             </ul>
@@ -146,7 +143,7 @@ export const Footer = () => {
             <div className="text-sm space-y-2 opacity-90">
               <p>Monday - Saturday</p>
               <p className="font-semibold text-base">10:00 AM - 7:00 PM</p>
-              <p className="text-xs mt-4">Sunday: Closed</p>
+              <p className="text-xs mt-4">Sunday: Tuesday</p>
             </div>
           </div>
         </div>

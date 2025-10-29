@@ -41,7 +41,7 @@ export const RequestQuoteModal = ({ open, onOpenChange, property }: RequestQuote
     
     message += `\n\nPlease contact me to discuss further.`;
     
-    const whatsappUrl = `https://wa.me/919268007694?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://wa.me/917678121555?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, "_blank");
     
     onOpenChange(false);

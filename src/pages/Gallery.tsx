@@ -64,7 +64,7 @@ const Gallery = () => {
     }
   }, [searchParams]);
 
-  const contactPhone = "+919268007694";
+  const contactPhone = "+917678121555";
 
   // Filter properties (not images) and exclude featured properties
   const filteredProperties = properties.filter((property) => {

@@ -174,7 +174,7 @@ export const PropertyDetailModal = ({
                 className="flex-1"
                 size="lg"
               >
-                <a href="tel:+919268007694">
+                <a href="tel:+917678121555">
                   <Phone className="w-4 h-4" />
                   Call Now
                 </a>

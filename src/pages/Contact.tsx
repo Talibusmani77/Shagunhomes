@@ -36,7 +36,7 @@ Preferred contact method: ${formData.contactMethod}
 
 Please get back to me at your earliest convenience.`;
 
-    const whatsappUrl = `https://wa.me/919268007694?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://wa.me/917678121555?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, "_blank");
 
     setFormData({
@@ -203,12 +203,9 @@ Please get back to me at your earliest convenience.`;
                   <h3 className="font-heading font-bold text-lg mb-2">Phone Numbers</h3>
                   <div className="space-y-1 text-muted-foreground">
                     <p>
-                      <a href="tel:+919268007694" className="hover:text-primary transition-colors">
-                        +91 9268007694
-                      </a>
                     </p>
-                    <p className="text-sm">Rajiv Kumar: <a href="tel:+919540408051" className="hover:text-primary transition-colors">+91 9540408051</a></p>
-                    <p className="text-sm">Pramod Kumar: <a href="tel:+919540400172" className="hover:text-primary transition-colors">+91 9540400172</a></p>
+                    <p className="text-sm">pramod katewa: <a href="tel:+91767812155" className="hover:text-primary transition-colors">7678121555</a></p>
+                    <p className="text-sm">Rajiv Tewatiya: <a href="tel:+919871035001" className="hover:text-primary transition-colors">9871035001</a></p>
                   </div>
                 </div>
               </div>
@@ -226,7 +223,7 @@ Please get back to me at your earliest convenience.`;
                     href="mailto:info@shagunhomes.com"
                     className="text-muted-foreground hover:text-primary transition-colors"
                   >
-                    info@shagunhomes.com
+                    info@shagunhomes.in
                   </a>
                 </div>
               </div>
@@ -243,7 +240,7 @@ Please get back to me at your earliest convenience.`;
                   <div className="text-muted-foreground space-y-1">
                     <p>Monday - Saturday</p>
                     <p className="font-semibold text-foreground">10:00 AM - 7:00 PM</p>
-                    <p className="text-sm">Sunday: Closed</p>
+                    <p className="text-sm">Tuesday: Closed</p>
                   </div>
                 </div>
               </div>

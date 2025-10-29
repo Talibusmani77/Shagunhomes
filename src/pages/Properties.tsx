@@ -134,10 +134,10 @@ const Properties = ({ filterType }: PropertiesPageProps) => {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="">All Locations</SelectItem>
-                    <SelectItem value="sector 18">Sector 18</SelectItem>
-                    <SelectItem value="sector 62">Sector 62</SelectItem>
-                    <SelectItem value="sector 27">Sector 27</SelectItem>
-                    <SelectItem value="extension">Noida Extension</SelectItem>
+                    <SelectItem value="sector 18">Greater Noida</SelectItem>
+                    <SelectItem value="sector 62">Noida</SelectItem>
+                    {/* <SelectItem value="sector 27">Sector 27</SelectItem>
+                    <SelectItem value="extension">Noida Extension</SelectItem> */}
                   </SelectContent>
                 </Select>
               </div>

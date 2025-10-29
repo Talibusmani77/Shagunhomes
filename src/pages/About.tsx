@@ -16,7 +16,7 @@ const About = () => {
             About ShagunHomes
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Trusted real estate advisors in Noida — Buy, Sell & Rent with transparency
+            Trusted real estate advisors in Greater Noida — Buy, Sell & Rent with transparency
           </p>
         </div>
       </section>
@@ -31,10 +31,10 @@ const About = () => {
               </h2>
               <div className="space-y-4 text-muted-foreground leading-relaxed">
                 <p>
-                  Founded by Rajiv Kumar and Pramod Kumar, ShagunHomes was born from a vision to transform the real estate experience in Noida. With deep local knowledge and years of industry expertise, we recognized the need for a more transparent and client-focused approach to property transactions.
+                  Founded by Rajiv Tewatiya and pramod katewa, ShagunHomes was born from a vision to transform the real estate experience in Greater Noida. With deep local knowledge and years of industry expertise, we recognized the need for a more transparent and client-focused approach to property transactions.
                 </p>
                 <p>
-                  Today, we stand as one of Noida's most trusted real estate advisors, having helped over 500 families find their perfect homes. Our commitment to verified listings, fair pricing, and end-to-end assistance has made us the preferred choice for property seekers across Noida and Greater Noida.
+                  Today, we stand as one of Greater Noida's most trusted real estate advisors, having helped over 500 families find their perfect homes. Our commitment to verified listings, fair pricing, and end-to-end assistance has made us the preferred choice for property seekers across Noida and Greater Noida.
                 </p>
                 <p>
                   What sets us apart is our local expertise combined with professional service standards. Every property we list undergoes thorough verification, and every client receives personalized attention throughout their property journey.
@@ -56,7 +56,7 @@ const About = () => {
               </div>
               <h3 className="text-2xl font-heading font-bold mb-4">Our Vision</h3>
               <p className="text-muted-foreground leading-relaxed">
-                To make property buying & renting in Noida seamless & transparent, becoming the most trusted real estate partner for every family seeking their dream home.
+                To make property buying & renting in Greater Noida seamless & transparent, becoming the most trusted real estate partner for every family seeking their dream home.
               </p>
             </div>
 

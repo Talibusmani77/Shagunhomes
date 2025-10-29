@@ -146,7 +146,7 @@ export const MainNavbar = ({ isScrolled, topNavVisible }: MainNavbarProps) => {
           </Link>
 
           <Button asChild size="default">
-            <a href="tel:+919268007694" className="flex items-center gap-2">
+            <a href="tel:+917678121555" className="flex items-center gap-2">
               <Phone className="w-4 h-4" />
               Call Now
             </a>
@@ -281,7 +281,7 @@ export const MainNavbar = ({ isScrolled, topNavVisible }: MainNavbarProps) => {
               Contact Us
             </Link>
             <Button asChild size="default" className="w-full">
-              <a href="tel:+919268007694" className="flex items-center justify-center gap-2">
+              <a href="tel:+917678121555" className="flex items-center justify-center gap-2">
                 <Phone className="w-4 h-4" />
                 Call Now
               </a>
