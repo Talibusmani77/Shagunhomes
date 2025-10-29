@@ -81,11 +81,9 @@ export const QuickSearch = () => {
                   <SelectValue placeholder="Select location" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="all">All Noida</SelectItem>
-                  <SelectItem value="sector-18">Sector 18</SelectItem>
-                  <SelectItem value="sector-62">Sector 62</SelectItem>
-                  <SelectItem value="sector-27">Sector 27</SelectItem>
-                  <SelectItem value="extension">Noida Extension</SelectItem>
+                  <SelectItem value="all">All Locations</SelectItem>
+                  <SelectItem value="sector-18">Greater Noida</SelectItem>
+                  <SelectItem value="sector-62">Noida</SelectItem>
                 </SelectContent>
               </Select>
             </div>

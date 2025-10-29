@@ -136,8 +136,6 @@ const Properties = ({ filterType }: PropertiesPageProps) => {
                     <SelectItem value="">All Locations</SelectItem>
                     <SelectItem value="sector 18">Greater Noida</SelectItem>
                     <SelectItem value="sector 62">Noida</SelectItem>
-                    {/* <SelectItem value="sector 27">Sector 27</SelectItem>
-                    <SelectItem value="extension">Noida Extension</SelectItem> */}
                   </SelectContent>
                 </Select>
               </div>
