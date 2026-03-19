@@ -2,17 +2,34 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { properties } from "@/data/properties";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { properties, Property } from "@/data/properties";
 import { AnimatePresence, motion } from "framer-motion";
-import { Bath, Bed, Home, MapPin, Maximize, Phone, SlidersHorizontal, X } from "lucide-react";
+import {
+  Bath,
+  Bed,
+  Home,
+  MapPin,
+  Maximize,
+  Phone,
+  SlidersHorizontal,
+  X,
+} from "lucide-react";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
 const Gallery = () => {
   const [searchParams] = useSearchParams();
-  const [selectedProperty, setSelectedProperty] = useState(null);
+
+  const [selectedProperty, setSelectedProperty] = useState<Property | null>(null);
   const [showFilters, setShowFilters] = useState(false);
+
   const [filters, setFilters] = useState({
     type: "all",
     category: "all",
@@ -22,354 +39,294 @@ const Gallery = () => {
     maxBudget: "",
   });
 
-  // Initialize filters from URL parameters
+  // ✅ URL FILTER
   useEffect(() => {
-    const urlType = searchParams.get('type');
-    const urlLocation = searchParams.get('location');
-    const urlMaxPrice = searchParams.get('maxPrice');
+    const urlType = searchParams.get("type");
+    const urlLocation = searchParams.get("location");
+    const urlMaxPrice = searchParams.get("maxPrice");
 
-    const newFilters = { ...filters };
-    
-    if (urlType) {
-      newFilters.type = urlType;
-    }
-    
-    if (urlLocation) {
-      // Map location values from QuickSearch to Gallery format
-      const locationMap = {
-        'sector-18': 'sector 18',
-        'sector-62': 'sector 62',
-        'sector-27': 'sector 27',
-        'extension': 'extension',
-        'all': 'all'
-      };
-      newFilters.location = locationMap[urlLocation] || urlLocation;
-    }
-    
-    if (urlMaxPrice) {
-      // Convert price abbreviations to actual numbers
-      const priceMap = {
-        '50L': '5000000',
-        '1Cr': '10000000',
-        '2Cr': '20000000',
-        '5Cr': '50000000'
-      };
-      newFilters.maxBudget = priceMap[urlMaxPrice] || '';
-    }
+    setFilters((prev) => {
+      const updated = { ...prev };
 
-    // Only update if we have URL params
-    if (urlType || urlLocation || urlMaxPrice) {
-      setFilters(newFilters);
-      setShowFilters(true); // Show filters when coming from search
-    }
+      if (urlType) updated.type = urlType;
+
+      if (urlLocation) {
+        const locationMap: Record<string, string> = {
+          "sector-18": "sector 18",
+          "sector-62": "sector 62",
+          "sector-27": "sector 27",
+          extension: "extension",
+        };
+        updated.location = locationMap[urlLocation] || urlLocation;
+      }
+
+      if (urlMaxPrice) {
+        const priceMap: Record<string, string> = {
+          "50L": "5000000",
+          "1Cr": "10000000",
+          "2Cr": "20000000",
+          "5Cr": "50000000",
+        };
+        updated.maxBudget = priceMap[urlMaxPrice] || "";
+      }
+
+      return updated;
+    });
+
+    // setShowFilters(true);
   }, [searchParams]);
 
-  const contactPhone = "+917678121555";
-
-  // Filter properties (not images) and exclude featured properties
+  // ✅ FILTER LOGIC FIXED
   const filteredProperties = properties.filter((property) => {
+    const locationText = `${property.location.city} ${property.location.sector}`.toLowerCase();
+
     return (
-      !property.featured && // Exclude featured properties
+      !property.featured &&
       (filters.type === "all" || property.type === filters.type) &&
       (filters.category === "all" || property.category === filters.category) &&
-      (filters.location === "all" || (property.location && property.location.toLowerCase().includes(filters.location.toLowerCase()))) &&
-      (filters.bhk === "any" || (property.bhk && property.bhk.toString() === filters.bhk)) &&
-      (!filters.minBudget || (property.price && property.price >= Number(filters.minBudget))) &&
-      (!filters.maxBudget || (property.price && property.price <= Number(filters.maxBudget)))
+      (filters.location === "all" ||
+        locationText.includes(filters.location.toLowerCase())) &&
+      (filters.bhk === "any" ||
+        property.bhk.toString() === filters.bhk ||
+        (filters.bhk === "4" && property.bhk >= 4)) &&
+      (!filters.minBudget || property.price >= Number(filters.minBudget)) &&
+      (!filters.maxBudget || property.price <= Number(filters.maxBudget))
     );
   });
 
-  const formatPrice = (price) => {
-    if (!price) return 'Price on Request';
-    if (price >= 10000000) {
-      return `₹${(price / 10000000).toFixed(2)} Cr`;
-    } else if (price >= 100000) {
-      return `₹${(price / 100000).toFixed(2)} Lac`;
-    }
-    return `₹${price.toLocaleString('en-IN')}`;
-  };
-
-  const handleContactAgent = () => {
-    window.location.href = `tel:${contactPhone}`;
+  const formatPrice = (price: number) => {
+    if (price >= 10000000) return `₹${(price / 10000000).toFixed(2)} Cr`;
+    if (price >= 100000) return `₹${(price / 100000).toFixed(2)} Lac`;
+    return `₹${price.toLocaleString("en-IN")}`;
   };
 
   return (
     <div className="pt-44 pb-16">
       <div className="container mx-auto px-4 md:px-8">
-        {/* Header */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-12"
-        >
-          <h1 className="text-4xl md:text-5xl font-heading font-bold mb-4">
-            Gallery
-          </h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Explore our collection of premium properties across Greater Noida
-          </p>
-        </motion.div>
 
-        {/* Filter Toggle Button */}
-        <div className="mb-6">
-          <Button
-            variant="outline"
-            onClick={() => setShowFilters(!showFilters)}
-            className="w-full md:w-auto"
-          >
-            <SlidersHorizontal className="w-4 h-4 mr-2" />
-            {showFilters ? "Hide Filters" : "Show Filters"}
-          </Button>
-        </div>
+        {/* HEADER */}
+        <h1 className="text-4xl font-bold text-center mb-4">Gallery</h1>
+<p className="text-center text-muted-foreground mb-8">
+  Explore our collection of premium properties across Greater Noida
+</p>
 
-        {/* Filters */}
+        {/* FILTER BUTTON */}
+        <Button onClick={() => setShowFilters(!showFilters)} className="mt-4 mb-4">
+          <SlidersHorizontal className="w-4 h-4 mr-2" />
+          Filters
+        </Button>
+
+        {/* FILTERS */}
         <AnimatePresence>
           {showFilters && (
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3 }}
-              className="bg-card rounded-xl p-6 shadow-md mb-8"
-            >
-              <div className="flex justify-between items-center mb-4">
-                <h3 className="font-heading font-bold text-lg">Filters</h3>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => setShowFilters(false)}
+            <motion.div className="bg-card p-6 rounded-xl mt-4 mb-6">
+              <div className="grid md:grid-cols-4 gap-4">
+
+                <Select
+                  value={filters.type}
+                  onValueChange={(val) =>
+                    setFilters((p) => ({ ...p, type: val }))
+                  }
                 >
-                  <X className="w-4 h-4" />
-                </Button>
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <div className="space-y-2">
-                  <Label>Property Type</Label>
-                  <Select value={filters.type} onValueChange={(val) => setFilters({ ...filters, type: val })}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="All Types" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="all">All Types</SelectItem>
-                      <SelectItem value="Buy">Buy</SelectItem>
-                      <SelectItem value="Rent">Rent</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
+                  <SelectTrigger><SelectValue placeholder="Type" /></SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All</SelectItem>
+                    <SelectItem value="Buy">Buy</SelectItem>
+                    <SelectItem value="Rent">Rent</SelectItem>
+                  </SelectContent>
+                </Select>
 
-                <div className="space-y-2">
-                  <Label>Category</Label>
-                  <Select value={filters.category} onValueChange={(val) => setFilters({ ...filters, category: val })}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="All Categories" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="all">All Categories</SelectItem>
-                      <SelectItem value="Residential">Residential</SelectItem>
-                      <SelectItem value="Commercial">Commercial</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div className="space-y-2">
-                  <Label>Location</Label>
-                  <Select value={filters.location} onValueChange={(val) => setFilters({ ...filters, location: val })}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="All Locations" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="all">All Locations</SelectItem>
-                      <SelectItem value="sector 18">Sector 18</SelectItem>
-                      <SelectItem value="sector 62">Sector 62</SelectItem>
-                      <SelectItem value="sector 27">Sector 27</SelectItem>
-                      <SelectItem value="extension">Noida Extension</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div className="space-y-2">
-                  <Label>Bedrooms</Label>
-                  <Select value={filters.bhk} onValueChange={(val) => setFilters({ ...filters, bhk: val })}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Any" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="any">Any</SelectItem>
-                      <SelectItem value="1">1 BHK</SelectItem>
-                      <SelectItem value="2">2 BHK</SelectItem>
-                      <SelectItem value="3">3 BHK</SelectItem>
-                      <SelectItem value="4">4+ BHK</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-
-              {/* Budget Filters */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-                <div className="space-y-2">
-                  <Label>Min Budget (₹)</Label>
-                  <Input
-                    type="number"
-                    placeholder="e.g., 5000000"
-                    value={filters.minBudget}
-                    onChange={(e) => setFilters({ ...filters, minBudget: e.target.value })}
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label>Max Budget (₹)</Label>
-                  <Input
-                    type="number"
-                    placeholder="e.g., 20000000"
-                    value={filters.maxBudget}
-                    onChange={(e) => setFilters({ ...filters, maxBudget: e.target.value })}
-                  />
-                </div>
-              </div>
-
-              <div className="mt-4">
-                <Button
-                  variant="outline"
-                  onClick={() => setFilters({ type: "all", category: "all", location: "all", bhk: "any", minBudget: "", maxBudget: "" })}
+                <Select
+                  value={filters.category}
+                  onValueChange={(val) =>
+                    setFilters((p) => ({ ...p, category: val }))
+                  }
                 >
-                  Clear Filters
-                </Button>
+                  <SelectTrigger><SelectValue placeholder="Category" /></SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All</SelectItem>
+                    <SelectItem value="Residential">Residential</SelectItem>
+                    <SelectItem value="Commercial">Commercial</SelectItem>
+                  </SelectContent>
+                </Select>
+
+                <Select
+                  value={filters.location}
+                  onValueChange={(val) =>
+                    setFilters((p) => ({ ...p, location: val }))
+                  }
+                >
+                  <SelectTrigger><SelectValue placeholder="Location" /></SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All</SelectItem>
+                    <SelectItem value="Sector 150">Sector 150</SelectItem>
+                  <SelectItem value="Sector 137">Sector 137</SelectItem>
+                  <SelectItem value="Sector 36">Sector 36</SelectItem>
+                  <SelectItem value="Sector 1">Greater Noida West</SelectItem>
+                  <SelectItem value="Sector 22D">Sector 22D</SelectItem>
+                  <SelectItem value="Sector Zeta 1">Zeta 1</SelectItem>
+                  <SelectItem value="Yamuna Expressway">
+                    Yamuna Expressway
+                  </SelectItem>
+                  </SelectContent>
+                </Select>
+
+                <Select
+                  value={filters.bhk}
+                  onValueChange={(val) =>
+                    setFilters((p) => ({ ...p, bhk: val }))
+                  }
+                >
+                  <SelectTrigger><SelectValue placeholder="BHK" /></SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="any">Any</SelectItem>
+                    <SelectItem value="1">1</SelectItem>
+                    <SelectItem value="2">2</SelectItem>
+                    <SelectItem value="3">3</SelectItem>
+                    <SelectItem value="4">4+</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
 
-              <div className="mt-4 text-sm text-muted-foreground">
-                Showing {filteredProperties.length} properties
+              <div className="grid md:grid-cols-2 gap-4 mt-4">
+                <Input
+                  placeholder="Min Price"
+                  type="number"
+                  value={filters.minBudget}
+                  onChange={(e) =>
+                    setFilters((p) => ({ ...p, minBudget: e.target.value }))
+                  }
+                />
+                <Input
+                  placeholder="Max Price"
+                  type="number"
+                  value={filters.maxBudget}
+                  onChange={(e) =>
+                    setFilters((p) => ({ ...p, maxBudget: e.target.value }))
+                  }
+                />
               </div>
             </motion.div>
           )}
         </AnimatePresence>
 
-        {/* Property Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-          {filteredProperties.map((property, index) => (
-            <motion.div
+        {/* GRID */}
+        <div className="grid md:grid-cols-3 gap-6">
+          {filteredProperties.map((property) => (
+            <div
               key={property.id}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: index * 0.05 }}
-              className="group relative aspect-square overflow-hidden rounded-xl cursor-pointer bg-muted"
+              className="cursor-pointer"
               onClick={() => setSelectedProperty(property)}
             >
               <img
                 src={property.images[0]}
-                alt={property.title}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                className="w-full h-52 object-cover rounded-lg"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
-                  <p className="font-semibold text-sm">{property.title}</p>
-                  <p className="text-xs opacity-90">{property.location}</p>
-                </div>
-              </div>
-            </motion.div>
+              <h3 className="font-semibold mt-2">{property.title}</h3>
+              <p className="text-sm text-muted-foreground">
+                {property.location.city}, {property.location.sector}
+              </p>
+            </div>
           ))}
         </div>
-
-        {filteredProperties.length === 0 && (
-          <div className="text-center py-12">
-            <p className="text-muted-foreground">No properties found matching your criteria</p>
-          </div>
-        )}
       </div>
 
-      {/* Property Details Modal */}
+      {/* MODAL */}
       <Dialog open={!!selectedProperty} onOpenChange={() => setSelectedProperty(null)}>
-        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
-          {selectedProperty && (
-            <div className="space-y-6">
-              {/* Property Images */}
-              <div className="grid grid-cols-1 gap-4">
-                {selectedProperty.images.map((img, idx) => (
-                  <img
-                    key={idx}
-                    src={img}
-                    alt={`${selectedProperty.title} - ${idx + 1}`}
-                    className="w-full h-64 object-cover rounded-lg"
-                  />
-                ))}
-              </div>
+  <DialogContent className="max-w-5xl max-h-[90vh] overflow-y-auto">
 
-              {/* Property Title & Price */}
-              <div>
-                <h2 className="text-3xl font-heading font-bold mb-2">
-                  {selectedProperty.title}
-                </h2>
-                <div className="flex items-center gap-2 text-muted-foreground mb-4">
-                  <MapPin className="w-4 h-4" />
-                  <span>{selectedProperty.location}</span>
-                </div>
-                <div className="text-3xl font-bold text-primary">
-                  {formatPrice(selectedProperty.price)}
-                </div>
-              </div>
+    {selectedProperty && (
+      <div className="space-y-6">
 
-              {/* Property Details Grid */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div className="bg-muted p-4 rounded-lg">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Home className="w-5 h-5 text-primary" />
-                    <span className="text-sm font-semibold">Type</span>
-                  </div>
-                  <p className="text-lg font-bold">{selectedProperty.type}</p>
-                </div>
+        {/* ✅ IMAGES */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <img
+            src={selectedProperty.images[0]}
+            className="w-full h-64 object-cover rounded-lg"
+          />
+          <img
+            src={selectedProperty.images[1] || selectedProperty.images[0]}
+            className="w-full h-64 object-cover rounded-lg"
+          />
+        </div>
 
-                <div className="bg-muted p-4 rounded-lg">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Bed className="w-5 h-5 text-primary" />
-                    <span className="text-sm font-semibold">Bedrooms</span>
-                  </div>
-                  <p className="text-lg font-bold">{selectedProperty.bhk} BHK</p>
-                </div>
+        {/* TITLE */}
+        <h2 className="text-2xl font-bold">
+          {selectedProperty.title}
+        </h2>
 
-                <div className="bg-muted p-4 rounded-lg">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Bath className="w-5 h-5 text-primary" />
-                    <span className="text-sm font-semibold">Bathrooms</span>
-                  </div>
-                  <p className="text-lg font-bold">{selectedProperty.bathrooms || 'N/A'}</p>
-                </div>
+        {/* LOCATION */}
+        <p className="text-muted-foreground">
+          {selectedProperty.location.city}, {selectedProperty.location.sector}
+        </p>
 
-                <div className="bg-muted p-4 rounded-lg">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Maximize className="w-5 h-5 text-primary" />
-                    <span className="text-sm font-semibold">Area</span>
-                  </div>
-                  <p className="text-lg font-bold">{selectedProperty.area || 'N/A'} sq.ft</p>
-                </div>
-              </div>
+        {/* PRICE */}
+        <p className="text-xl font-bold text-primary">
+          ₹{selectedProperty.price.toLocaleString("en-IN")}
+        </p>
 
-              {/* Category Badge */}
-              <div>
-                <span className="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full font-semibold">
-                  {selectedProperty.category}
-                </span>
-              </div>
+        {/* DETAILS */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
 
-              {/* Description */}
-              {selectedProperty.description && (
-                <div>
-                  <h3 className="text-xl font-heading font-bold mb-3">Description</h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    {selectedProperty.description}
-                  </p>
-                </div>
-              )}
+          <div className="bg-muted p-3 rounded-lg">
+            <p className="text-sm">Type</p>
+            <p className="font-bold">{selectedProperty.type}</p>
+          </div>
 
-              {/* Action Buttons */}
-              <div className="flex gap-4 pt-4">
-                <Button className="flex-1" onClick={handleContactAgent}>
-                  <Phone className="w-4 h-4 mr-2" />
-                  Contact Agent
-                </Button>
-              </div>
-            </div>
-          )}
-        </DialogContent>
-      </Dialog>
+          <div className="bg-muted p-3 rounded-lg">
+            <p className="text-sm">Category</p>
+            <p className="font-bold">{selectedProperty.category}</p>
+          </div>
+
+          <div className="bg-muted p-3 rounded-lg">
+            <p className="text-sm">BHK</p>
+            <p className="font-bold">{selectedProperty.bhk}</p>
+          </div>
+
+          <div className="bg-muted p-3 rounded-lg">
+            <p className="text-sm">Bathrooms</p>
+            <p className="font-bold">{selectedProperty.bathrooms}</p>
+          </div>
+
+          <div className="bg-muted p-3 rounded-lg">
+            <p className="text-sm">Area</p>
+            <p className="font-bold">{selectedProperty.area_sqft} sq.ft</p>
+          </div>
+
+          <div className="bg-muted p-3 rounded-lg">
+            <p className="text-sm">Furnishing</p>
+            <p className="font-bold">{selectedProperty.furnishing}</p>
+          </div>
+
+        </div>
+
+        {/* DESCRIPTION */}
+        <div>
+          <h3 className="font-semibold">Description</h3>
+          <p>{selectedProperty.description}</p>
+        </div>
+
+        {/* AGENT */}
+        <div className="bg-muted p-4 rounded-lg">
+          <p>{selectedProperty.agent.name}</p>
+          <p>{selectedProperty.agent.phone}</p>
+        </div>
+
+        <Button
+  className="w-full mt-4"
+  onClick={() =>
+    (window.location.href = `tel:${selectedProperty.agent.phone}`)
+  }
+>
+  <Phone className="w-4 h-4 mr-2" />
+  Call Agent
+</Button>
+
+      </div>
+    )}
+
+  </DialogContent>
+</Dialog>
     </div>
   );
 };

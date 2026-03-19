@@ -1,13 +1,12 @@
-import { useState } from "react";
 import { PropertyCard } from "@/components/PropertyCard";
 import { PropertyDetailModal } from "@/components/PropertyDetailModal";
 import { RequestQuoteModal } from "@/components/RequestQuoteModal";
-import { properties, Property } from "@/data/properties";
+import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Button } from "@/components/ui/button";
+import { properties, Property } from "@/data/properties";
 import { SlidersHorizontal } from "lucide-react";
+import { useState } from "react";
 
 interface PropertiesPageProps {
   filterType?: "Buy" | "Rent" | "Residential" | "Commercial";
@@ -49,13 +48,16 @@ const Properties = ({ filterType }: PropertiesPageProps) => {
 
   // Filter properties
   const filteredProperties = properties.filter((prop) => {
-    if (filters.type && prop.type !== filters.type) return false;
-    if (filters.category && prop.category !== filters.category) return false;
-    if (filters.location && !prop.location.toLowerCase().includes(filters.location.toLowerCase())) return false;
-    if (filters.bhk && prop.bhk.toString() !== filters.bhk) return false;
-    if (filters.furnishing && prop.furnishing !== filters.furnishing) return false;
-    return true;
-  });
+  const location = `${prop.location.city} ${prop.location.sector}`.toLowerCase();
+
+  if (filters.type && prop.type !== filters.type) return false;
+  if (filters.category && prop.category !== filters.category) return false;
+  if (filters.location && !location.includes(filters.location.toLowerCase())) return false;
+  if (filters.bhk && prop.bhk.toString() !== filters.bhk) return false;
+  if (filters.furnishing && prop.furnishing !== filters.furnishing) return false;
+
+  return true;
+});
 
   const getPageTitle = () => {
     if (filterType === "Buy") return "Properties for Sale";
@@ -135,7 +137,7 @@ const Properties = ({ filterType }: PropertiesPageProps) => {
                   <SelectContent>
                     <SelectItem value="">All Locations</SelectItem>
                     <SelectItem value="sector 18">Greater Noida</SelectItem>
-                    <SelectItem value="sector 62">Noida</SelectItem>
+                    <SelectItem value="sector 62">Greater Noida West</SelectItem>
                   </SelectContent>
                 </Select>
               </div>

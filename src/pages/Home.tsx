@@ -195,9 +195,9 @@ const Home = () => {
                 </div>
                 <p className="text-muted-foreground italic">"{testimonial.quote}"</p>
                 <div className="flex items-center gap-3 pt-4 border-t border-border">
-                  <Avatar className="w-10 h-10">
+                  {/* <Avatar className="w-10 h-10">
                     <img src={testimonial.avatar} alt={testimonial.name} />
-                  </Avatar>
+                  </Avatar> */}
                   <div>
                     <p className="font-semibold">{testimonial.name}</p>
                   </div>

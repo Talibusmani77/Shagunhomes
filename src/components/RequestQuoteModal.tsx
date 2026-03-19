@@ -28,7 +28,7 @@ export const RequestQuoteModal = ({ open, onOpenChange, property }: RequestQuote
     
     if (property) {
       message += `\n\nI am interested in the property "${property.title}" (₹${property.price.toLocaleString('en-IN')})`;
-      message += `\nLocation: ${property.location}`;
+      message += `\nLocation: ${property.location.city}, {property.location.sector}`;
     }
     
     if (formData.time) {
@@ -61,7 +61,7 @@ export const RequestQuoteModal = ({ open, onOpenChange, property }: RequestQuote
           <div className="rounded-lg bg-muted p-3 text-sm space-y-1">
             <p className="font-semibold">{property.title}</p>
             <p className="text-secondary font-bold">₹{property.price.toLocaleString('en-IN')}</p>
-            <p className="text-muted-foreground">{property.location}</p>
+            <p className="text-muted-foreground">{property.location.city}, {property.location.sector}</p>
           </div>
         )}
 

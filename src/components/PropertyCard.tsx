@@ -43,7 +43,9 @@ export const PropertyCard = ({ property, onViewDetails, onRequestVisit }: Proper
           </p>
           <div className="flex items-center gap-1 text-sm text-muted-foreground">
             <MapPin className="w-4 h-4" />
-            <span>{property.location}</span>
+            <span>
+  {property.location.city}, {property.location.sector}
+</span>
           </div>
         </div>
 
