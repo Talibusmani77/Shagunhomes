@@ -1,13 +1,13 @@
-import { useState, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
-import { properties } from "@/data/properties";
+import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { SlidersHorizontal, X, MapPin, Home, Bed, Bath, Maximize, Phone } from "lucide-react";
+import { properties } from "@/data/properties";
+import { AnimatePresence, motion } from "framer-motion";
+import { Bath, Bed, Home, MapPin, Maximize, Phone, SlidersHorizontal, X } from "lucide-react";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 const Gallery = () => {
   const [searchParams] = useSearchParams();
@@ -106,7 +106,7 @@ const Gallery = () => {
             Gallery
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Explore our collection of premium properties across Noida
+            Explore our collection of premium properties across Greater Noida
           </p>
         </motion.div>
 
