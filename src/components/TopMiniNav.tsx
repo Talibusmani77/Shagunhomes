@@ -19,7 +19,7 @@ export const TopMiniNav = ({ visible }: TopMiniNavProps) => {
       >
         <div className="container mx-auto px-4 md:px-8 h-full flex items-center justify-between text-sm">
           {/* Social icons - Left */}
-          <div className="flex items-center gap-4">
+          {/* <div className="flex items-center gap-4">
             <a href="#" className="text-muted-foreground hover:text-secondary transition-colors">
               <Facebook className="w-5 h-5" />
             </a>
@@ -32,7 +32,7 @@ export const TopMiniNav = ({ visible }: TopMiniNavProps) => {
             <a href="#" className="text-muted-foreground hover:text-secondary transition-colors">
               <Youtube className="w-5 h-5" />
             </a>
-          </div>
+          </div> */}
 
           {/* Contact info & CTA - Right */}
           <div className="hidden md:flex items-center gap-5 text-muted-foreground">
