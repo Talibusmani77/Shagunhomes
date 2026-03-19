@@ -1,4 +1,4 @@
-import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone, Youtube } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export const Footer = () => {
@@ -23,7 +23,7 @@ export const Footer = () => {
             <p className="text-sm opacity-90 leading-relaxed">
               Your trusted real estate partner in Greater Noida. We provide verified listings, local expertise, and transparent dealings for all your property needs.
             </p>
-            <div className="flex gap-3">
+            {/* <div className="flex gap-3">
               <a href="#" className="hover:text-secondary transition-colors">
                 <Facebook className="w-5 h-5" />
               </a>
@@ -36,7 +36,7 @@ export const Footer = () => {
               <a href="#" className="hover:text-secondary transition-colors">
                 <Youtube className="w-5 h-5" />
               </a>
-            </div>
+            </div> */}
           </div>
 
           {/* Quick Links */}

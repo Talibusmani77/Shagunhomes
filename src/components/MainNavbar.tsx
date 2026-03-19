@@ -1,6 +1,6 @@
+import { ChevronDown, Menu, Phone, X } from "lucide-react";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, ChevronDown, Phone } from "lucide-react";
 import { Button } from "./ui/button";
 
 interface MainNavbarProps {
@@ -22,20 +22,18 @@ export const MainNavbar = ({ isScrolled, topNavVisible }: MainNavbarProps) => {
 
   return (
     <nav
-      className={`fixed left-0 right-0 z-40 h-18 transition-all duration-300 ${
-        topNavVisible ? "top-9" : "top-0"
-      } ${
-        isScrolled || !isHome
+      className={`fixed left-0 right-0 z-40 h-18 md:h-20 transition-all duration-300 ${topNavVisible ? "md:top-9 top-0" : "top-0"
+        } ${isScrolled || !isHome || mobileMenuOpen
           ? "bg-background shadow-md"
           : "bg-transparent"
-      }`}
+        }`}
     >
       <div className="container mx-auto px-4 md:px-8 h-full flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 group">
-          <img 
-            src="/Shagun home.png" 
-            alt="ShagunHomes Logo" 
+          <img
+            src="/Shagun home.png"
+            alt="ShagunHomes Logo"
             className="h-20 md:h-24 lg:h-28 w-auto object-contain max-w-[210px] md:max-w-[210px]"
           />
         </Link>
@@ -45,30 +43,27 @@ export const MainNavbar = ({ isScrolled, topNavVisible }: MainNavbarProps) => {
           <Link
             to="/"
             onClick={scrollToTop}
-            className={`text-sm font-medium hover:text-primary transition-colors ${
-              isScrolled || !isHome ? 'text-foreground' : 'text-white'
-            }`}
+            className={`text-sm font-medium hover:text-primary transition-colors ${isScrolled || !isHome ? 'text-foreground' : 'text-white'
+              }`}
           >
             Home
           </Link>
           <Link
             to="/about"
             onClick={scrollToTop}
-            className={`text-sm font-medium hover:text-primary transition-colors ${
-              isScrolled || !isHome ? 'text-foreground' : 'text-white'
-            }`}
+            className={`text-sm font-medium hover:text-primary transition-colors ${isScrolled || !isHome ? 'text-foreground' : 'text-white'
+              }`}
           >
             About Us
           </Link>
-          
+
           {/* Properties Dropdown */}
           <div
             className="relative group"
           >
             <button
-              className={`flex items-center gap-1 text-sm font-medium hover:text-primary transition-colors ${
-                isScrolled || !isHome ? 'text-foreground' : 'text-white'
-              }`}
+              className={`flex items-center gap-1 text-sm font-medium hover:text-primary transition-colors ${isScrolled || !isHome ? 'text-foreground' : 'text-white'
+                }`}
             >
               Properties
               <ChevronDown className="w-4 h-4" />
@@ -120,27 +115,24 @@ export const MainNavbar = ({ isScrolled, topNavVisible }: MainNavbarProps) => {
           <Link
             to="/gallery"
             onClick={scrollToTop}
-            className={`text-sm font-medium hover:text-primary transition-colors ${
-              isScrolled || !isHome ? 'text-foreground' : 'text-white'
-            }`}
+            className={`text-sm font-medium hover:text-primary transition-colors ${isScrolled || !isHome ? 'text-foreground' : 'text-white'
+              }`}
           >
             Gallery
           </Link>
           <Link
             to="/testimonials"
             onClick={scrollToTop}
-            className={`text-sm font-medium hover:text-primary transition-colors ${
-              isScrolled || !isHome ? 'text-foreground' : 'text-white'
-            }`}
+            className={`text-sm font-medium hover:text-primary transition-colors ${isScrolled || !isHome ? 'text-foreground' : 'text-white'
+              }`}
           >
             Testimonials
           </Link>
           <Link
             to="/contact"
             onClick={scrollToTop}
-            className={`text-sm font-medium hover:text-primary transition-colors ${
-              isScrolled || !isHome ? 'text-foreground' : 'text-white'
-            }`}
+            className={`text-sm font-medium hover:text-primary transition-colors ${isScrolled || !isHome ? 'text-foreground' : 'text-white'
+              }`}
           >
             Contact Us
           </Link>
@@ -190,7 +182,7 @@ export const MainNavbar = ({ isScrolled, topNavVisible }: MainNavbarProps) => {
             >
               About Us
             </Link>
-            
+
             {/* Mobile Properties Dropdown */}
             <div>
               <button
