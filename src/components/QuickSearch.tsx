@@ -41,9 +41,9 @@ export const QuickSearch = () => {
   };
 
   return (
-    <div className="relative -mt-20 z-20">
+    <div className="relative py-10 md:py-14 bg-background">
       <div className="container mx-auto px-4 md:px-8">
-        <div className="bg-card rounded-xl shadow-lg p-6 md:p-8 max-w-5xl mx-auto">
+        <div className="bg-card rounded-2xl shadow-lg p-6 md:p-8 max-w-5xl mx-auto border border-border">
           <h3 className="text-xl font-heading font-bold mb-6 text-center">
             Find Your Perfect Property
           </h3>

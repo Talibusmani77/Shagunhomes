@@ -1,17 +1,16 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
 import { HeroCarousel } from "@/components/HeroCarousel";
-import { QuickSearch } from "@/components/QuickSearch";
+import LayoutMapsGallery from "@/components/Map";
 import { PropertyCard } from "@/components/PropertyCard";
 import { PropertyDetailModal } from "@/components/PropertyDetailModal";
+import { QuickSearch } from "@/components/QuickSearch";
 import { RequestQuoteModal } from "@/components/RequestQuoteModal";
-import { properties, testimonials } from "@/data/properties";
-import { Property } from "@/data/properties";
-import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
-import { Shield, TrendingUp, Users, MapPin, Star ,X, Maximize2  } from "lucide-react";
 import { Avatar } from "@/components/ui/avatar";
-import LayoutMapsGallery from "@/components/Map";
+import { Button } from "@/components/ui/button";
+import { properties, Property, testimonials } from "@/data/properties";
+import { motion } from "framer-motion";
+import { MapPin, Shield, Star, TrendingUp, Users } from "lucide-react";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [selectedProperty, setSelectedProperty] = useState<Property | null>(null);
@@ -66,11 +65,11 @@ const Home = () => {
 
   return (
     <div>
-      {/* Hero Carousel */}
       <HeroCarousel />
 
-      {/* Quick Search */}
-      <QuickSearch />
+<section className="bg-background">
+  <QuickSearch />
+</section>
 
       {/* Featured Properties */}
       <section className="py-16 md:py-24">
@@ -85,7 +84,7 @@ const Home = () => {
               Featured Properties
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Handpicked premium properties across Noida's prime locations
+              Handpicked premium properties across Greater Noida's prime locations
             </p>
           </motion.div>
 
@@ -133,7 +132,7 @@ const Home = () => {
               Why Choose ShagunHomes
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Your trusted partner in Noida real estate
+              Your trusted partner in Greater Noida real estate
             </p>
           </motion.div>
 
